@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {handleInitialData} from '../actions/shared'
 import Questions from './Questions'
+import QuestionPage from './QuestionPage'
 
 class App extends Component {
   componentDidMount() {
@@ -10,12 +12,17 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        {this.props.loading === true
-          ? null
-          : <Questions/>
-        }
-      </div>
+      <Router>
+        <div className='container'>
+          {this.props.loading === true
+            ? null
+            : <div>
+              <Route path='/' exact component={Questions}/>
+              <Route path='/questions/:id' component={QuestionPage} />
+            </div>
+          }
+        </div>
+      </Router>
     )
   }
 }
