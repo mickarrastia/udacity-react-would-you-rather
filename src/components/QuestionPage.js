@@ -1,18 +1,18 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {handleUserAnswer} from '../actions/users'
 
 class QuestionPage extends Component {
   handleChange = (e) => {
-    e.preventDefault()
     const answer = e.target.value
-    const {authedUser, qid} = this.props
-    console.log({authedUser, qid, answer})
+    const {dispatch, authedUser, qid} = this.props
+    dispatch(handleUserAnswer({authedUser, qid, answer}))
 
-    //TODO: dispatch answer (but also need to create reducer)
+    // TODO: dispatch handleVoteUpdate for question action and reducer
   }
 
   render() {
-    const {author, avatarURL, answeredOption, optionOne, optionTwo} = this.props
+    const {author, avatarURL, answer, optionOne, optionTwo} = this.props
     return (
       <div>
         <h3 className='center'>Would You Rather</h3>
@@ -26,7 +26,7 @@ class QuestionPage extends Component {
             <input
               value='optionOne'
               type='checkbox'
-              checked={answeredOption === 'optionOne'}
+              checked={answer === 'optionOne'}
               onChange={this.handleChange}/>
             <label htmlFor='optionTwo'>{optionOne}</label>
           </div>
@@ -34,10 +34,13 @@ class QuestionPage extends Component {
             <input
               value='optionTwo'
               type='checkbox'
-              checked={answeredOption === 'optionTwo'}
+              checked={answer === 'optionTwo'}
               onChange={this.handleChange}/>
             <label htmlFor='optionTwo'>{optionTwo}</label>
           </div>
+          {answer !== undefined && answer !== null && (
+            <div>Stats go here</div>
+          )}
         </div>
       </div>
     )
@@ -53,7 +56,7 @@ function mapStateToProps({questions, users, authedUser}, props) {
     qid: id,
     author,
     avatarURL: users[author].avatarURL,
-    answeredOption: users[authedUser].answers[id],
+    answer: users[authedUser].answers[id],
     optionOne: question.optionOne.text,
     optionTwo: question.optionTwo.text
   }
