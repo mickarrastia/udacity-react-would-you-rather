@@ -22,7 +22,7 @@ class Questions extends Component {
     const questions = display === 'unanswered' ? this.props.unansweredQuestions : this.props.answeredQuestions
     return (
       <div>
-        <h3 className='center'>Questions</h3>
+        <h2 className='center'>Questions</h2>
         <button value='unanswered' onClick={this.displayQuestions} disabled={display==='unanswered'}>Unanswered</button>
         <button value='answered' onClick={this.displayQuestions} disabled={display==='answered'}>Answered</button>
         <ul className='questions-list'>

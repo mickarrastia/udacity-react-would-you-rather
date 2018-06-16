@@ -1,46 +1,79 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {handleUserAnswer} from '../actions/users'
+import {handleAnswer} from '../actions/shared'
+import {deregisterVote} from '../actions/questions'
 
 class QuestionPage extends Component {
+
   handleChange = (e) => {
     const answer = e.target.value
     const {dispatch, authedUser, qid} = this.props
-    dispatch(handleUserAnswer({authedUser, qid, answer}))
+    const previousAnswer = this.props.answer
 
-    // TODO: dispatch handleVoteUpdate for question action and reducer
+    if (previousAnswer !== undefined && previousAnswer !== null && previousAnswer !== answer) {
+      dispatch(deregisterVote({authedUser, qid, previousAnswer}))
+    }
+
+    dispatch(handleAnswer({authedUser, qid, answer}))
+  }
+
+  getTotalVotes = (qid, answer) => {
+    const {questions} = this.props
+    return questions[qid][answer].votes.length
+  }
+
+  getPercentageVotes = (qid, answer) => {
+    const {users} = this.props
+    const numberUsers = Object.keys(users).length
+    return Math.round(this.getTotalVotes(qid, answer) / numberUsers * 100)
+  }
+
+  getStats = (qid, answer) => {
+    const totalVotes = this.getTotalVotes(qid, answer)
+    const percentageVotes = this.getPercentageVotes(qid, answer)
+    const totalVotesText = totalVotes > 1 || totalVotes === 0 ? 'votes' : 'vote'
+    return (
+      <div>
+        <p>{totalVotes} {totalVotesText}</p>
+        <p>{percentageVotes}% of users</p>
+      </div>
+    )
+  }
+
+  getOption = (optionKey, optionText, qid, answer) => {
+    return (<div className='question-option'>
+      <input
+        className='question-checkbox'
+        value={optionKey}
+        type='checkbox'
+        checked={answer === optionKey}
+        onChange={this.handleChange}/>
+      <label className='question-label' htmlFor='optionOne'>{optionText}</label>
+      <div className='option-stats'>
+        {answer !== undefined && answer !== null && this.getStats(qid, optionKey)}
+      </div>
+    </div>
+    )
   }
 
   render() {
-    const {author, avatarURL, answer, optionOne, optionTwo} = this.props
+    const {qid, author, avatarURL, answer, optionOneText, optionTwoText} = this.props
+
+    //TODO: Refactor the duplication of the question-option block
+
     return (
       <div>
-        <h3 className='center'>Would You Rather</h3>
-        <div style={{marginLeft: 100 + 'px'}}>
+        <h2 className='center'>Would You Rather</h2>
+        <div className='question'>
           <img
             src={avatarURL}
             alt={`Avatar of ${author}`}
             className='avatar'
           />
-          <div>
-            <input
-              value='optionOne'
-              type='checkbox'
-              checked={answer === 'optionOne'}
-              onChange={this.handleChange}/>
-            <label htmlFor='optionTwo'>{optionOne}</label>
+          <div className='question-info'>
+            {this.getOption('optionOne', optionOneText, qid, answer)}
+            {this.getOption('optionTwo', optionTwoText, qid, answer)}
           </div>
-          <div>
-            <input
-              value='optionTwo'
-              type='checkbox'
-              checked={answer === 'optionTwo'}
-              onChange={this.handleChange}/>
-            <label htmlFor='optionTwo'>{optionTwo}</label>
-          </div>
-          {answer !== undefined && answer !== null && (
-            <div>Stats go here</div>
-          )}
         </div>
       </div>
     )
@@ -57,8 +90,10 @@ function mapStateToProps({questions, users, authedUser}, props) {
     author,
     avatarURL: users[author].avatarURL,
     answer: users[authedUser].answers[id],
-    optionOne: question.optionOne.text,
-    optionTwo: question.optionTwo.text
+    optionOneText: question.optionOne.text,
+    optionTwoText: question.optionTwo.text,
+    users,
+    questions,
   }
 }
 
