@@ -165,3 +165,17 @@ a {
   border-width: 2px;
 }
 
+.user {
+  width: 100%;
+  max-width: 350px;
+  padding: 10px;
+  display: flex;
+  margin: 0 auto;
+  border: 1px solid #dad7d7;
+  border-radius: 3px;
+}
+
+.user-stats {
+  margin-left: 20px;
+  flex-direction: column;
+}
