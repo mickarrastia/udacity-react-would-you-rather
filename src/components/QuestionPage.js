@@ -48,7 +48,8 @@ class QuestionPage extends Component {
           value={optionKey}
           type='checkbox'
           checked={answer === optionKey}
-          onChange={this.handleChange}/>
+          onChange={this.handleChange}
+          disabled={answer ? true : false}/>
         <label className='question-label' htmlFor='optionOne'>{optionText}</label>
         <div className='option-stats'>
           {answer !== undefined && answer !== null && this.getStats(qid, optionKey)}
