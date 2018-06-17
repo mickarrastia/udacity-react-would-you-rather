@@ -59,8 +59,6 @@ class QuestionPage extends Component {
   render() {
     const {qid, author, avatarURL, answer, optionOneText, optionTwoText} = this.props
 
-    //TODO: Refactor the duplication of the question-option block
-
     return (
       <div>
         <h2 className='center'>Would You Rather</h2>

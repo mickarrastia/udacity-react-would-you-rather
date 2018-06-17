@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {handleInitialData} from '../actions/shared'
 import Questions from './Questions'
 import QuestionPage from './QuestionPage'
+import Nav from './Nav'
 
 class App extends Component {
   componentDidMount() {
@@ -14,6 +15,7 @@ class App extends Component {
     return (
       <Router>
         <div className='container'>
+          <Nav/>
           {this.props.loading === true
             ? null
             : <div>

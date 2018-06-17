@@ -26,6 +26,21 @@ a {
   cursor: pointer;
 }
 
+.active {
+  font-weight: bold;
+}
+
+.nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  text-decoration: none;
+}
+
+.nav li:first-child {
+  padding-left: 0;
+}
+
 .question-buttons {
   width: 100%;
   max-width: 590px;
