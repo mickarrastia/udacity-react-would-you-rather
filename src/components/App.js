@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {handleInitialData} from '../actions/shared'
 import Questions from './Questions'
 import QuestionPage from './QuestionPage'
+import AddQuestion from './AddQuestion'
 import Nav from './Nav'
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
             : <div>
               <Route path='/' exact component={Questions}/>
               <Route path='/questions/:id' component={QuestionPage} />
+              <Route path='/add' component={AddQuestion} />
             </div>
           }
         </div>

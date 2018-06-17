@@ -40,7 +40,7 @@ class QuestionPage extends Component {
     )
   }
 
-  getOption = (optionKey, optionText, qid, answer) => {
+  displayOption = (optionKey, optionText, qid, answer) => {
     return (<div className='question-option'>
       <input
         className='question-checkbox'
@@ -69,8 +69,8 @@ class QuestionPage extends Component {
             className='avatar'
           />
           <div className='question-info'>
-            {this.getOption('optionOne', optionOneText, qid, answer)}
-            {this.getOption('optionTwo', optionTwoText, qid, answer)}
+            {this.displayOption('optionOne', optionOneText, qid, answer)}
+            {this.displayOption('optionTwo', optionTwoText, qid, answer)}
           </div>
         </div>
       </div>
