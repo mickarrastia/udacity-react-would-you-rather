@@ -10,7 +10,7 @@ class Questions extends Component {
 
   displayQuestions = (e) => {
     e.preventDefault()
-    const value = e.target.value
+    const value = e.target.getAttribute('value')
     this.setState(() => ({
         display: value
       }
@@ -23,8 +23,14 @@ class Questions extends Component {
     return (
       <div>
         <h2 className='center'>Questions</h2>
-        <button value='unanswered' onClick={this.displayQuestions} disabled={display==='unanswered'}>Unanswered</button>
-        <button value='answered' onClick={this.displayQuestions} disabled={display==='answered'}>Answered</button>
+        <div className='question-buttons'>
+          <div onClick={this.displayQuestions}
+             className={display === 'unanswered' ? 'button-selected' : 'button-deselected'}
+             value='unanswered'>Unanswered</div>
+          <div onClick={this.displayQuestions}
+             className={display === 'answered' ? 'button-selected' : 'button-deselected'}
+             value='answered'>Answered</div>
+        </div>
         <ul className='questions-list'>
           {questions.map((id) => (
             <li key={id}>

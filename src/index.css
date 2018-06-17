@@ -26,6 +26,27 @@ a {
   cursor: pointer;
 }
 
+.question-buttons {
+  width: 100%;
+  max-width: 590px;
+  padding: 10px 10px 10px 30px;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+}
+
+.question-buttons div {
+  margin: 5px;
+  cursor: pointer;
+}
+.button-selected {
+  font-weight: bold;
+}
+
+.button-deselected {
+  font-weight: lighter;
+}
+
 .question {
   width: 100%;
   max-width: 590px;
@@ -35,6 +56,7 @@ a {
   border: 1px solid #dad7d7;
   border-radius: 3px;
 }
+
 .question-text {
   font-size: 18px;
   margin: 10px 0;
