@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-//import { handleAddTweet } from '../actions/tweets'
-//import { Redirect } from 'react-router-dom'
+import {handleAddQuestion} from '../actions/shared'
 
 class AddQuestion extends Component {
   state = {
@@ -21,7 +20,10 @@ class AddQuestion extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log('Handling submit')
+    const {optionOneText, optionTwoText} = this.state
+    const {dispatch} = this.props
+    dispatch(handleAddQuestion(optionOneText, optionTwoText))
+    this.setState(() => ({optionOneText, optionTwoText}))
   }
 
   displayOption = (placeHolder, value, onChange, maxLength, questionLeft) => {

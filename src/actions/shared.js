@@ -1,6 +1,6 @@
-import {getInitialData, saveQuestionAnswer} from '../utils/api'
-import {receiveUsers, answerQuestion} from './users'
-import {receiveQuestions, registerVote} from './questions'
+import {getInitialData, saveQuestionAnswer, saveQuestion} from '../utils/api'
+import {receiveUsers, answerQuestion, assignUserQuestion} from './users'
+import {receiveQuestions, registerVote, addQuestion} from './questions'
 import {setAuthedUser} from './authedUser'
 
 const AUTHED_ID = 'tylermcginnis'
@@ -23,6 +23,17 @@ export function handleAnswer(info) {
 
     // TODO: This should catch any possible errors and return the store to it's original unanswered state
     return saveQuestionAnswer(info)
+  }
+}
+
+export function handleAddQuestion(optionOneText, optionTwoText) {
+  return (dispatch, getState) => {
+    const {authedUser} = getState()
+    return saveQuestion({optionOneText, optionTwoText, author: authedUser})
+      .then((question) => {
+        dispatch(addQuestion(question))
+        dispatch(assignUserQuestion(question.author, question.id))
+      })
   }
 }
 
