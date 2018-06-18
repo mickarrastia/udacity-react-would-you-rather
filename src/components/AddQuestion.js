@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {handleAddQuestion} from '../actions/shared'
+import OptionText from './OptionText'
 
 class AddQuestion extends Component {
   state = {
@@ -26,38 +27,16 @@ class AddQuestion extends Component {
     this.setState(() => ({optionOneText, optionTwoText}))
   }
 
-  displayOption = (placeHolder, value, onChange, maxLength, questionLeft) => {
-    return (
-      <div className='new-question'>
-            <textarea
-              placeholder={placeHolder}
-              value={value}
-              onChange={onChange}
-              className='textarea'
-              maxLength={maxLength}
-            />
-        {questionLeft <= 50 && (
-          <div className='question-length'>
-            {questionLeft}
-          </div>
-        )}
-      </div>
-    )
-  }
-
   render() {
-    const OPTION_MAX_LENGTH = 100
     const {optionOneText, optionTwoText} = this.state
-    const questionOneLeft = OPTION_MAX_LENGTH - optionOneText.length
-    const questionTwoLeft = OPTION_MAX_LENGTH - optionTwoText.length
     return (
       <div>
         <h2 className='center'>Would You Rather</h2>
 
         <form className='new-question' onSubmit={this.handleSubmit}>
-          {this.displayOption('Option 1', optionOneText, this.handleChangeOptionOne, OPTION_MAX_LENGTH, questionOneLeft)}
+          <OptionText placeholder='Option 1' text={optionOneText} changeHandler={this.handleChangeOptionOne}/>
           <p>or</p>
-          {this.displayOption('Option 2', optionTwoText, this.handleChangeOptionTwo, OPTION_MAX_LENGTH, questionTwoLeft)}
+          <OptionText placeholder='Option 2' text={optionTwoText} changeHandler={this.handleChangeOptionTwo}/>
           <button
             className='btn'
             type='submit'
