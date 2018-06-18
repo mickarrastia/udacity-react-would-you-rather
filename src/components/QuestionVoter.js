@@ -4,7 +4,7 @@ import {handleAnswer} from '../actions/shared'
 import {deregisterVote} from '../actions/questions'
 import OptionSelector from './OptionSelector'
 
-class QuestionPage extends Component {
+class QuestionVoter extends Component {
 
   handleSelection = (e) => {
     const answer = e.target.value
@@ -57,4 +57,4 @@ function mapStateToProps({questions, users, authedUser}, props) {
   }
 }
 
-export default connect(mapStateToProps)(QuestionPage)
+export default connect(mapStateToProps)(QuestionVoter)

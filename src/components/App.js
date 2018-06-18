@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {handleInitialData} from '../actions/shared'
 import Questions from './Questions'
-import QuestionPage from './QuestionPage'
+import QuestionVoter from './QuestionVoter'
 import AddQuestion from './AddQuestion'
 import Leaderboard from './Leaderboard'
 import Nav from './Nav'
@@ -22,7 +22,7 @@ class App extends Component {
             ? null
             : <div>
               <Route path='/' exact component={Questions}/>
-              <Route path='/questions/:id' component={QuestionPage} />
+              <Route path='/questions/:id' component={QuestionVoter} />
               <Route path='/add' component={AddQuestion} />
               <Route path='/leaderboard' component={Leaderboard} />
             </div>
