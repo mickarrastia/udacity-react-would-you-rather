@@ -1,5 +1,5 @@
-import {RECEIVE_QUESTIONS, DEREGISTER_VOTE} from '../actions/questions'
-import {ANSWER_QUESTION, ADD_QUESTION} from '../actions/users'
+import {RECEIVE_QUESTIONS} from '../actions/questions'
+import {ANSWER_QUESTION, ADD_QUESTION, REMOVE_ANSWER} from '../actions/users'
 
 export default function questions(state = {}, action) {
   switch (action.type) {
@@ -24,7 +24,7 @@ export default function questions(state = {}, action) {
         ...state,
         [action.question.id]: action.question
       }
-    case DEREGISTER_VOTE:
+    case REMOVE_ANSWER:
       return {
         ...state,
         [action.qid]: {

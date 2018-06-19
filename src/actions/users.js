@@ -3,6 +3,7 @@ import {saveQuestion, saveQuestionAnswer} from '../utils/api'
 export const RECEIVE_USERS = 'RECEIVE_USERS'
 export const ANSWER_QUESTION = 'ANSWER_QUESTION'
 export const ADD_QUESTION = 'ADD_QUESTION'
+export const REMOVE_ANSWER = 'REMOVE_ANSWER'
 
 export function receiveUsers(users) {
   return {
