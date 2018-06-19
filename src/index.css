@@ -18,6 +18,12 @@ a {
   color: #252525;
 }
 
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
 .center {
   text-align: center;
 }
@@ -30,6 +36,30 @@ a {
   font-weight: bold;
 }
 
+.logout {
+  cursor: pointer;
+}
+
+.logout:hover {
+  font-weight: bold;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.login select {
+  font-size: large;
+}
+
+.login input {
+  font-size: large;
+  margin-left: 5px;
+  padding: 5px;
+}
+
 .nav ul {
   display: flex;
   flex-direction: row;
@@ -39,6 +69,19 @@ a {
 
 .nav li:first-child {
   padding-left: 0;
+}
+
+.authed-user {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.authed-user div {
+  padding-left: 10px;
 }
 
 .question-buttons {
