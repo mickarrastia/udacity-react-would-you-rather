@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {handleAnswer} from '../actions/shared'
-import {deregisterVote} from '../actions/questions'
+import {handleAnswer} from '../actions/users'
 import OptionSelector from './OptionSelector'
 
 class QuestionVoter extends Component {
@@ -9,12 +8,6 @@ class QuestionVoter extends Component {
   handleSelection = (e) => {
     const answer = e.target.value
     const {dispatch, authedUser, qid} = this.props
-    const previousAnswer = this.props.answer
-
-    if (previousAnswer !== undefined && previousAnswer !== null && previousAnswer !== answer) {
-      dispatch(deregisterVote({authedUser, qid, previousAnswer}))
-    }
-
     dispatch(handleAnswer({authedUser, qid, answer}))
   }
 

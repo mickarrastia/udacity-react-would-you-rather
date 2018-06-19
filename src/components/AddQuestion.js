@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {handleAddQuestion} from '../actions/shared'
+import { Redirect } from 'react-router-dom'
+import {handleAddQuestion} from '../actions/users'
 import OptionText from './OptionText'
 
 class AddQuestion extends Component {
   state = {
     optionOneText: '',
-    optionTwoText: ''
+    optionTwoText: '',
+    toHome: false
   }
 
   handleChangeOptionOne = (e) => {
@@ -24,11 +26,18 @@ class AddQuestion extends Component {
     const {optionOneText, optionTwoText} = this.state
     const {dispatch} = this.props
     dispatch(handleAddQuestion(optionOneText, optionTwoText))
-    this.setState(() => ({optionOneText, optionTwoText}))
+    this.setState(() => ({
+      optionOneText: '',
+      optionTwoText: '',
+      toHome: true
+    }))
   }
 
   render() {
-    const {optionOneText, optionTwoText} = this.state
+    const {optionOneText, optionTwoText, toHome} = this.state
+    if (toHome === true) {
+      return <Redirect to='/' />
+    }
     return (
       <div>
         <h2 className='center'>Would You Rather</h2>

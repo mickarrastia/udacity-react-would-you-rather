@@ -35,6 +35,7 @@ class App extends Component {
 
 function mapsStateToProps({authedUser}) {
   return {
+    authedUser,
     loading: authedUser === null
   }
 }

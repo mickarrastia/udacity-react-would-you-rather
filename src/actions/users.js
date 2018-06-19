@@ -1,6 +1,8 @@
+import {saveQuestion, saveQuestionAnswer} from '../utils/api'
+
 export const RECEIVE_USERS = 'RECEIVE_USERS'
 export const ANSWER_QUESTION = 'ANSWER_QUESTION'
-export const ASSIGN_USER_QUESTION = 'ASSIGN_USER_QUESTION'
+export const ADD_QUESTION = 'ADD_QUESTION'
 
 export function receiveUsers(users) {
   return {
@@ -9,7 +11,7 @@ export function receiveUsers(users) {
   }
 }
 
-export function answerQuestion({authedUser, qid, answer}) {
+function answerQuestion({authedUser, qid, answer}) {
   return {
     type: ANSWER_QUESTION,
     authedUser,
@@ -18,10 +20,29 @@ export function answerQuestion({authedUser, qid, answer}) {
   }
 }
 
-export function assignUserQuestion(authedUser, qid) {
+function addQuestion(question) {
   return {
-    type: ASSIGN_USER_QUESTION,
-    authedUser,
-    qid
+    type: ADD_QUESTION,
+    question
+  }
+}
+
+export function handleAnswer(info) {
+  return (dispatch) => {
+    dispatch(answerQuestion(info))
+
+    // TODO: This should catch any possible errors and return the store to it's original unanswered state
+    return saveQuestionAnswer(info)
+  }
+}
+
+export function handleAddQuestion(optionOneText, optionTwoText) {
+  return (dispatch, getState) => {
+    const {authedUser} = getState()
+
+    return saveQuestion({optionOneText, optionTwoText, author: authedUser})
+      .then((question) => {
+        dispatch(addQuestion(question))
+      })
   }
 }
