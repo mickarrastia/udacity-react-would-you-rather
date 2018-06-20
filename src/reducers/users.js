@@ -1,4 +1,4 @@
-import {RECEIVE_USERS, ANSWER_QUESTION, ADD_QUESTION} from '../actions/users'
+import {RECEIVE_USERS, ANSWER_QUESTION, ADD_QUESTION, REMOVE_ANSWER} from '../actions/users'
 
 export default function users(state = {}, action) {
   switch (action.type) {
@@ -24,6 +24,19 @@ export default function users(state = {}, action) {
         [action.question.author]: {
           ...state[action.question.author],
           questions: state[action.question.author].questions.concat([action.question.id])
+        }
+      }
+    case REMOVE_ANSWER:
+      return {
+        ...state,
+        [action.authedUser]: {
+          ...state[action.authedUser],
+          answers: Object.keys(state[action.authedUser].answers).reduce((acc, key) => {
+            if (key !== action.qid) {
+              return {...acc, [key]: state[action.authedUser].answers[key]}
+            }
+            return acc;
+          }, {})
         }
       }
     default :

@@ -21,6 +21,15 @@ function answerQuestion({authedUser, qid, answer}) {
   }
 }
 
+function removeAnswer({authedUser, qid, answer}) {
+  return {
+    type: REMOVE_ANSWER,
+    authedUser,
+    qid,
+    answer
+  }
+}
+
 function addQuestion(question) {
   return {
     type: ADD_QUESTION,
@@ -32,8 +41,12 @@ export function handleAnswer(info) {
   return (dispatch) => {
     dispatch(answerQuestion(info))
 
-    // TODO: This should catch any possible errors and return the store to it's original unanswered state
     return saveQuestionAnswer(info)
+      .catch((e) => {
+        console.warn('Error in saveQuestionAnswer: ', e)
+        dispatch(removeAnswer(info))
+        alert('The was an error saving the answer. Try again.')
+      })
   }
 }
 
