@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 import {setAuthedUser} from '../actions/authedUser'
 
 class AuthedUser extends Component {
 
   logout = () => {
     const {dispatch} = this.props
+    this.props.history.push('/');
     dispatch(setAuthedUser(''))
   }
 
@@ -27,4 +29,4 @@ function mapStateToProps({authedUser, users}) {
   }
 }
 
-export default connect(mapStateToProps)(AuthedUser)
+export default withRouter(connect(mapStateToProps)(AuthedUser))

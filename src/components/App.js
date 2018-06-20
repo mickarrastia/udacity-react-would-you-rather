@@ -50,6 +50,7 @@ class App extends Component {
 
 /**
  * Credit to Tyler McGinnis
+ * https://tylermcginnis.com/react-router-protected-routes-authentication/
  * https://stackoverflow.com/questions/43164554/how-to-implement-authenticated-routes-in-react-router-4/43171515#43171515
  */
 function PrivateRoute({component: Component, authed, ...rest}) {
@@ -58,7 +59,9 @@ function PrivateRoute({component: Component, authed, ...rest}) {
       {...rest}
       render={(props) => authed === true
         ? <Component {...props} />
-        : <Redirect to={{pathname: '/login', state: {from: props.location}}}/>
+        : <Redirect to={{
+          pathname: '/login',
+          state: {from: props.location}}}/>
       }
     />
   )

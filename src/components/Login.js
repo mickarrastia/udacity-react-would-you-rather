@@ -25,8 +25,7 @@ class Login extends Component {
     const {users, userIds, from} = this.props
 
     if (redirectToReferrer === true) {
-      return <Redirect to={from}
-      />
+      return <Redirect to={from}/>
     }
 
     return (
@@ -49,7 +48,7 @@ function mapStateToProps({users}, props) {
   return {
     users,
     userIds: Object.keys(users).sort(),
-    from: props.location.state ? props.location.state.from : { pathname: '/' }
+    from: props.location.state ? props.location.state.from : {pathname: '/'}
   }
 }
 
