@@ -27,6 +27,9 @@ The application's login flow, which includes login redirection, is based on Tyle
  * https://tylermcginnis.com/react-router-protected-routes-authentication/
  * https://stackoverflow.com/questions/43164554/how-to-implement-authenticated-routes-in-react-router-4/43171515#43171515
 
+Additionally, Tyler McGinnis' [Real World Redux example](https://tylermcginnis.com/projects/redux-twitter/) provided by
+the Udacity course has provided valuable examples and patterns for implementation. 
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
 ## Backend API
